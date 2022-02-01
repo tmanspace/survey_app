@@ -1,4 +1,7 @@
-# survey_app
+# Survey app on Vue 3
+
+## About
+Connecting backend and Vue application with this dummy example
 
 ## Project setup
 ```
