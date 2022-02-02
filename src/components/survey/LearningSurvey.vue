@@ -41,6 +41,7 @@
         <p v-if="invalidInput">
           One or more input fields are invalid. Please check your provided data.
         </p>
+        <p v-if="serverRes">{{ serverRes }}</p>
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -56,6 +57,7 @@ export default {
       enteredName: "",
       chosenRating: null,
       invalidInput: false,
+      serverRes: "",
     };
   },
   // emits: ["survey-submit"],
@@ -79,7 +81,17 @@ export default {
             rating: this.chosenRating,
           }),
         }
-      );
+      )
+        .then((response) => {
+          if (response.ok) {
+            this.serverRes = "The survey result added successfully!";
+          } else {
+            this.serverRes = "There was a problem. Please, try again later.";
+          }
+        })
+        .catch((err) => {
+          this.serverRes = err.message;
+        });
 
       // this.$emit("survey-submit", {
       //   userName: this.enteredName,
